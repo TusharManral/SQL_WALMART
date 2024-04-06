@@ -81,17 +81,20 @@ set  month_name=(monthname(date));
 select * from walmartsalesdata;
 
 -- Generic Question
+
 -- How many unique cities does the data have?
 select distinct city
 from walmartsalesdata;
 
 
 -- In which city is each branch?
+
 select city, count(Branch) from walmartsalesdata
 group by city;
 
 -- Product
 -- How many unique product lines does the data have?
+
 select distinct(`Product Line`) from walmartsalesdata;
 
 -- What is the most common payment method?
@@ -102,6 +105,7 @@ order by count(payment) Desc;
 -- Ewallet is the most used payment method.
 
 -- What is the most selling product line?
+
 select `Product line`, count(*) from walmartsalesdata
 group by `Product line`
 order by count(*) DESC;
@@ -118,11 +122,13 @@ group by month_name
 order by month_name Desc;
 
 -- What product line had the largest revenue?
+
 select `product line`,sum(total) as revenue from walmartsalesdata
 group by `product line`
 order by revenue Desc;
 
 -- What is the city with the largest revenue?
+
 select city,sum(total) as revenue from walmartsalesdata
 group by city
 order by revenue Desc;
@@ -159,6 +165,7 @@ group by `Product line`, gender
 order by number Desc;
 
 -- What is the average rating of each product line?
+
 select `product line`,avg(Rating) from walmartsalesdata
 group by `product line`
 order by avg(Rating) Desc;
@@ -193,23 +200,28 @@ group by `customer type`;
 
 -- ------------------------------------------ CUSTOMER-----------------------------------------
 -- How many unique payment methods does the data have?
+
 select distinct(payment) from walmartsalesdata;
 
 -- What is the most common customer type?
+
 select `Customer type`, count(*) from walmartsalesdata
 group by `Customer type`;
 
 -- Which customer type buys the most?
+
 select `customer type`, (`Unit price`* Quantity) as Spend
 from walmartsalesdata
 group by `customer type`
 order by spend DEsc;
 
 -- What is the gender of most of the customers?
+
 select Gender, count(*) from walmartsalesdata
 group by Gender;
 
 -- What is the gender distribution per branch?
+
 select branch, gender, count(gender) from walmartsalesdata
 group by branch, gender;
 
@@ -220,17 +232,20 @@ group by time_of_date
 order by rating Desc;
 
 -- Which time of the day do customers give most ratings per branch?
+
 select branch,time_of_date, rating from walmartsalesdata
 group by branch,time_of_date
 order by rating Desc, branch Asc;
 
 
 -- Which day of the week has the best avg ratings?
+
 select day_name, avg(Rating) from walmartsalesdata
 group by day_name
 order by avg(Rating) Desc;
 
 -- Which day of the week has the best average ratings per branch?
+
 select branch,day_name,avg(rating) from walmartsalesdata
 group by branch, day_name
 order by avg(rating) Desc, Branch;
